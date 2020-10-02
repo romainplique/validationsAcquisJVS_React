@@ -23,7 +23,6 @@ export const addProductToBasket = (
         idProduct,
         quantity,
     }).then(({ data }) => {
-        console.log(data);
         dispatch({
             type: ADD_PRODUCT_TO_BASKET,
             basketProduct: data,
@@ -46,11 +45,9 @@ export const updateBasketProductQuantity = (
     idBasketProduct,
     quantity,
 ) => (dispatch) => {
-    console.log(idBasketProduct, quantity);
     Axios.patch(`/api/basketproducts/${idBasketProduct}`, {
         quantity,
     }).then(({ data }) => {
-        console.log(data);
         dispatch({
             type: UPDATE_PRODUCT_QUANTITY,
             basketProduct: data,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -115,6 +116,19 @@ const ProductListItem = (props) => {
         </Card>
 
     );
+};
+
+ProductListItem.propTypes = {
+    addProduct: PropTypes.func.isRequired,
+    updateProductQuantity: PropTypes.func.isRequired,
+    basketProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    product: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        price: PropTypes.number,
+        image: PropTypes.string,
+    }).isRequired,
 };
 
 export default connect(

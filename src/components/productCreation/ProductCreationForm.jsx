@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -18,7 +19,7 @@ import {
 } from 'react-router-dom';
 import { createProduct, updateProduct } from '../../store/actions/productsActions';
 
-const MainForm = (props) => {
+const ProductCreationForm = (props) => {
     // Récupération des params passés à la route (ici l'id du produit)
     const { id } = useParams();
     const {
@@ -185,6 +186,12 @@ const MainForm = (props) => {
     );
 };
 
+ProductCreationForm.propTypes = {
+    createNewProduct: PropTypes.func.isRequired,
+    updateSelectedProduct: PropTypes.func.isRequired,
+    productList: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 export default connect(
     (state) => ({
         productList: state.productsReducer?.productList,
@@ -193,4 +200,4 @@ export default connect(
         createNewProduct: createProduct,
         updateSelectedProduct: updateProduct,
     }, dispatch),
-)(MainForm);
+)(ProductCreationForm);

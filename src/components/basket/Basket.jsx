@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -44,7 +45,8 @@ const Basket = (props) => {
 
                         <Table.Footer>
                             <Table.Row>
-                                <Table.HeaderCell colSpan='6'>
+                                <Table.HeaderCell colSpan='4' />
+                                <Table.HeaderCell colSpan='2'>
                                     Total
                                 </Table.HeaderCell>
                             </Table.Row>
@@ -57,6 +59,10 @@ const Basket = (props) => {
                 </Dimmer>
             )
     );
+};
+
+Basket.propTypes = {
+    basketProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(

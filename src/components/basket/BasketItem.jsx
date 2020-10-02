@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -15,15 +16,13 @@ const BasketItem = (props) => {
         updateProductQuantity,
         removeProduct,
     } = props;
-
     const {
         id,
         idProduct,
         quantity,
     } = basketProduct;
-
+    // On cherche le produit correspondant pour pouvoir afficher ses infos (nom, image, prix)
     const basketProductItem = productList.find((product) => product.id === idProduct);
-
     const {
         name,
         description,
@@ -93,6 +92,17 @@ const BasketItem = (props) => {
                 </Table.Row>
             ) : <></>
     );
+};
+
+BasketItem.propTypes = {
+    basketProduct: PropTypes.shape({
+        id: PropTypes.number,
+        idProduct: PropTypes.number,
+        quantity: PropTypes.number,
+    }).isRequired,
+    productList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    updateProductQuantity: PropTypes.func.isRequired,
+    removeProduct: PropTypes.func.isRequired,
 };
 
 export default connect(

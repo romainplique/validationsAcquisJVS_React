@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -35,6 +36,10 @@ const ProductList = (props) => {
                     <Loader />
                 </Dimmer>
             ));
+};
+
+ProductList.propTypes = {
+    productList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(
