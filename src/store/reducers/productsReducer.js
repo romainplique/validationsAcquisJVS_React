@@ -2,10 +2,12 @@ import {
     GET_ALL_PRODUCTS,
     UPDATE_PRODUCT,
     CREATE_PRODUCT,
+    GET_PRODUCT,
 } from '../constants/actionsTypes';
 
 const initialState = {
     productList: [],
+    productDetail: null,
     currentPage: 0,
     lastPage: 0,
 };
@@ -16,14 +18,15 @@ export default function productsReducer(state = initialState, action) {
             return {
                 ...state,
                 productList: [...action.productList],
-                currentPage: action.currentPage,
-                lastPage: action.lastPage,
             };
-        case CREATE_PRODUCT:
-            console.log(action);
+        case GET_PRODUCT:
             return {
                 ...state,
-                // productList: [...action.productList, action.createdProduct],
+                productDetail: action.product,
+            };
+        case CREATE_PRODUCT:
+            return {
+                ...state,
             };
         case UPDATE_PRODUCT:
             return {

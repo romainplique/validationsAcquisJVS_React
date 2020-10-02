@@ -7,21 +7,26 @@ import {
     Route,
     Redirect,
 } from 'react-router-dom';
-import { Loader } from 'semantic-ui-react';
 import MainHeader from './MainHeader';
-import { getAllProducts } from '../store/actions/productsActions';
 import ProductList from './products/ProductList';
 import ProductCreationForm from './productCreation/ProductCreationForm';
+import Basket from './basket/Basket';
+import { getAllProducts } from '../store/actions/productsActions';
+import { getAllBasketProducts } from '../store/actions/basketProductsActions';
 
 const MainPage = (props) => {
     const {
-        productList = [],
         getProducts,
+        getBasket,
     } = props;
 
     React.useEffect(() => {
         getProducts(1);
     }, [getProducts]);
+
+    React.useEffect(() => {
+        getBasket(1);
+    }, [getBasket]);
 
     return (
         <div style={{ padding: '0.5rem' }}>
@@ -29,22 +34,17 @@ const MainPage = (props) => {
                 <MainHeader title='Validation des acquis' />
                 <Switch>
                     <Route
-                        render={() => (productList.length > 0
-                            ? (
-                                <ProductList />
-                            )
-                            : <Loader />)}
+                        render={() => (<ProductList />)}
                         path='/productList/:page?'
                     />
-                    {/* <Route
-                        render={() => (persons.length > 0
-                            ? (
-                                <MainList />
-                            )
-                            : <Loader />)}
-                        path='/list/:page?'
-                    /> */}
-                    <Route render={() => <ProductCreationForm productList={productList} />} path='/productCreation/:id?' />
+                    <Route
+                        render={() => (<Basket />)}
+                        path='/basket/:page?'
+                    />
+                    <Route
+                        render={() => <ProductCreationForm />}
+                        path='/productCreation/:id?'
+                    />
                     <Redirect to='/productList' />
                 </Switch>
             </BrowserRouter>
@@ -53,10 +53,9 @@ const MainPage = (props) => {
 };
 
 export default connect(
-    (state) => ({
-        productList: state.productsReducer?.productList,
-    }),
+    null,
     (dispatch) => bindActionCreators({
         getProducts: getAllProducts,
+        getBasket: getAllBasketProducts,
     }, dispatch),
 )(MainPage);

@@ -3,15 +3,23 @@ import {
     GET_ALL_PRODUCTS,
     CREATE_PRODUCT,
     UPDATE_PRODUCT,
+    GET_PRODUCT,
 } from '../constants/actionsTypes';
 
-export const getAllProducts = (page) => (dispatch) => {
-    Axios.get(`/api/products/?page=${page}`).then(({ data }) => {
+export const getAllProducts = () => (dispatch) => {
+    Axios.get('/api/products/').then(({ data }) => {
         dispatch({
             type: GET_ALL_PRODUCTS,
-            productList: data.data,
-            currentPage: data.current_page,
-            lastPage: data.last_page,
+            productList: data,
+        });
+    });
+};
+
+export const getProduct = (idProduct) => (dispatch) => {
+    Axios.get(`/api/products/${idProduct}`).then(({ data }) => {
+        dispatch({
+            type: GET_PRODUCT,
+            product: data,
         });
     });
 };
@@ -22,10 +30,8 @@ export const updateProduct = (id) => (dispatch) => {
     ).then(({ data }) => {
         dispatch({
             type: UPDATE_PRODUCT,
-            product: data.data,
+            product: data,
         });
-    }).catch(({ error }) => {
-        console.log(error);
     });
 };
 
@@ -35,17 +41,15 @@ export const createProduct = (
     price,
     image,
 ) => (dispatch) => {
-    console.log(name, description, price, image);
     Axios.post('/api/products', {
         name,
         description,
         price,
         image,
     }).then(({ data }) => {
-        console.log(data);
         dispatch({
             type: CREATE_PRODUCT,
-            product: data.data,
+            product: data,
         });
     });
 };
