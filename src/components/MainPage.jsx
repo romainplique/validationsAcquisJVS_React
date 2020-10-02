@@ -21,11 +21,11 @@ const MainPage = (props) => {
     } = props;
 
     React.useEffect(() => {
-        getProducts(1);
+        getProducts();
     }, [getProducts]);
 
     React.useEffect(() => {
-        getBasket(1);
+        getBasket();
     }, [getBasket]);
 
     return (

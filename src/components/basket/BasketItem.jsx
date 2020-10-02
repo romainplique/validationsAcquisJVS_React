@@ -74,16 +74,16 @@ const BasketItem = (props) => {
                     </Table.Cell>
                     <Table.Cell textAlign='center'>
                         <Button.Group>
-                            <Button negative onClick={handleDecreaseQuantity}>
+                            <Button color='blue' onClick={handleDecreaseQuantity}>
                                 <Icon name='minus' />
                             </Button>
                             <Button.Or text={quantity} color='black' />
-                            <Button primary onClick={handleIncreaseQuantity}>
+                            <Button color='blue' onClick={handleIncreaseQuantity}>
                                 <Icon name='plus' />
                             </Button>
                         </Button.Group>
                         <Divider />
-                        <Button icon secondary onClick={handleDeleteBasketProduct}>
+                        <Button icon negative circular onClick={handleDeleteBasketProduct}>
                             <Icon name='trash alternate outline' />
                         </Button>
                     </Table.Cell>
